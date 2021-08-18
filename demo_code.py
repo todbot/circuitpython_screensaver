@@ -2,6 +2,7 @@
 # 17 Aug 2021
 
 import time  # time is money
+import board
 
 from screensaver import screensaver_dvdlogo
 
