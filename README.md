@@ -5,6 +5,9 @@ Demo video:
 
 https://user-images.githubusercontent.com/274093/129969608-a1ea6c81-c9af-4391-923e-143fcaf08a24.mp4
 
+Also see [this tweet thread](https://twitter.com/todbot/status/1428096525217931264).
+
+
 ## Installation
 
 - Copy the entire `screensaver` directory to your CIRCUITPY drive
