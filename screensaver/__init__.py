@@ -6,6 +6,12 @@ import time, random
 import board, displayio, rainbowio  
 import adafruit_imageload
 
+try:
+    import rainbowio
+    def randcolor(): return rainbowio.colorwheel(random.randint(0,255))
+except ImportError:
+    def randcolor(): return random.randint(0,0xffffff) # not as good but passable
+
 # currently our only screensaver
 def screensaver_dvdlogo(display=board.DISPLAY, should_exit_func=None):
 
@@ -35,10 +41,10 @@ def screensaver_dvdlogo(display=board.DISPLAY, should_exit_func=None):
         # a bounce just changes the polarity of the velocity 
         if x - sprite_hw < 0 or x + sprite_hw > display.width:
             vx = -vx  # bounce!
-            sprite1_pal[1] = rainbowio.colorwheel(random.randint(0,255))
+            sprite1_pal[1] = randcolor() # rainbowio.colorwheel(random.randint(0,255))
         if y - sprite_hw < 0 or y + sprite_hw > display.height:
             vy = -vy  # bounce!
-            sprite1_pal[1] = rainbowio.colorwheel(random.randint(0,255))
+            sprite1_pal[1] = randcolor() # rainbowio.colorwheel(random.randint(0,255))
         # TileGrids are top-left referenced, so subtract that off
         # and convert to integer pixel x,y before setting tilegrid xy
         sprite1_tg.x = int(x - sprite_hw)
