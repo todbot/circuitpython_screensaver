@@ -28,7 +28,7 @@ def screensaver_dvdlogo(display=board.DISPLAY, should_exit_func=None):
     screen.append(sprite1_tg)
 
     x, y = display.width/2, display.height/2 # starting position, middle of screen
-    vx,vy = 2.5, 1.8  # initial velocity, seems cool
+    vx,vy = display.width / 100, display.height / 150 # initial velocity that seems cool
     
     sprite_hw = sprite_w//2  # integer half-width of our sprite, for bounce detection
 
