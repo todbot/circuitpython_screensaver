@@ -15,6 +15,5 @@ Also see [this tweet thread](https://twitter.com/todbot/status/14280965252179312
 
 ## Notes
 
-- Does require CircuitPython 7, but only for `rainbowio`. If you're on CP6,
-a quicky alternative for `rainbowio.colorwheel(random.randint(0,255))` is
-`random.randint(0,0xffffff)`
+- Assumes CircuitPython 7, but only for `rainbowio`. And should work in CP6.
+
