@@ -171,7 +171,7 @@ def screensaver_boingball(display=board.DISPLAY, should_exit_func=None,
     screen.append(sprite)
 
     x, y = display.width/2, display.height/2 # starting position, middle of screen
-    vx,vy = display.width / 80, display.height / 100 # initial velocity
+    vx,vy = display.width / 55, display.height / 80 # initial velocity
 
     sprite_hw = sprite_w//2 * sprite_scale  # integer half-width for bounce detection
 
