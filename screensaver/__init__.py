@@ -141,7 +141,8 @@ def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None,
         display.refresh(); time.sleep(0.01)
 
 # boingball! amiga bouncing ball
-def screensaver_boingball(display=board.DISPLAY, should_exit_func=None):
+def screensaver_boingball(display=board.DISPLAY, should_exit_func=None,
+                          bg_fname=None):
 
     sprite_scale = 2
     if display.height < 150: sprite_scale = 1
@@ -153,6 +154,11 @@ def screensaver_boingball(display=board.DISPLAY, should_exit_func=None):
     display.auto_refresh = False  # only update display on display.refresh()
     screen = displayio.Group()  # group that holds everything
     display.show(screen) # add main group to display
+
+    # get background image, if there is one
+    if bg_fname is not None:
+        bg_img, bg_pal = adafruit_imageload.load(bg_fname)
+        screen.append(displayio.TileGrid(bg_img, pixel_shader=bg_pal))
 
     sprite,sprite_pal = adafruit_imageload.load(sprite_fname)
     sprite_pal.make_transparent(0)
