@@ -57,8 +57,8 @@ def screensaver_dvdlogo(display=board.DISPLAY, should_exit_func=None):
 
 
 # flying toasters!
-def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None):
-
+def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None,
+                               num_toasters=2, num_toasts=3):
     sprite_w = 48 # width of the sprites
     sprite1_fname="/screensaver/toast_48.bmp"
     sprite2_fname="/screensaver/toaster_48.bmp"
@@ -98,7 +98,7 @@ def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None):
                 toaster.tg[0] = tilenum
 
     toasts = []
-    for i in range(3):
+    for i in range(num_toasts):
         x,y = random.randint(0,display.width), random.randint(0,display.height)
         vx,vy = -1.4 - random.uniform(0,0.8), 1 # standard toast velocity direction
         tg = displayio.TileGrid(sprite1, pixel_shader=sprite1_pal)
@@ -107,7 +107,7 @@ def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None):
         screen.append(tg)
 
     toasters = []
-    for i in range(2):
+    for i in range(num_toasters):
         x,y = random.randint(0,display.width), random.randint(0,display.height)
         vx,vy = -1.3 - random.random(), 1 # standard toast velocity direction
         tg = displayio.TileGrid(sprite2, pixel_shader=sprite2_pal,
