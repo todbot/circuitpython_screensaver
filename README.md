@@ -9,6 +9,10 @@ Demo video of flyingtoasters screensaver:
 
 https://user-images.githubusercontent.com/274093/129991271-908bda7a-8aca-4b34-a2d6-8dba57bfbeea.mp4
 
+Demo video of boingball screensaver:
+
+https://user-images.githubusercontent.com/274093/130105797-5048cdb5-e53a-4bdf-a39a-1e45ab7f0733.mp4
+
 
 For more info, see [this tweet thread](https://twitter.com/todbot/status/1428096525217931264).
 
@@ -58,5 +62,7 @@ screensaver_dvdlogo( should_exit_func=exit_screensaver )
 
 ## Notes
 
-- Assumes CircuitPython 7, but only for `rainbowio`. And should work in CP6.
+- Assumes CircuitPython 7, but only for `rainbowio`. And should work in CP6
+- `screensaver_flyingtoasters()` takes optional `num_toasters` and `num_toasts` arguments to tune how many you want
+- `screensaver_boingball()` takes optional `bg_fname` argument for a background image to put behind the ball
 
