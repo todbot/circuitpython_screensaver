@@ -139,3 +139,66 @@ def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None,
 
         # this gives framerate of 20-24 FPS on FunHouse (ESP32S2 240x240 SPI TFT)
         display.refresh(); time.sleep(0.01)
+
+# boingball! amiga bouncing ball
+def screensaver_boingball(display=board.DISPLAY, should_exit_func=None):
+
+    sprite_scale = 2
+    if display.height < 150: sprite_scale = 1
+    
+    sprite_w = 32 # width of the sprite to create
+    sprite_fname="/screensaver/boingball_32.bmp"
+    sprite_tile_count = 18
+
+    display.auto_refresh = False  # only update display on display.refresh()
+    screen = displayio.Group()  # group that holds everything
+    display.show(screen) # add main group to display
+
+    sprite,sprite_pal = adafruit_imageload.load(sprite_fname)
+    sprite_pal.make_transparent(0)
+    sprite_pal.make_transparent(1)
+    sprite_tg = displayio.TileGrid(sprite, pixel_shader=sprite_pal,
+                                width=1, height=1,
+                                tile_width=sprite_w, tile_height=sprite_w)
+    sprite = displayio.Group(scale=sprite_scale)
+    sprite.append(sprite_tg)
+    screen.append(sprite)
+
+    x, y = display.width/2, display.height/2 # starting position, middle of screen
+    vx,vy = display.width / 80, display.height / 100 # initial velocity
+
+    sprite_hw = sprite_w//2 * sprite_scale  # integer half-width for bounce detection
+
+    g = 0.25   # our gravity acceleration
+    tile_inc = 1  # which way we play the sprite animation tiles
+
+    last_tile_time = time.monotonic()
+    while True:
+        if should_exit_func is not None and should_exit_func(): return
+
+        # update our position based on our velocity
+        x,y  = x + vx, y + vy
+        # update our velocity based on acceleration
+        vy = vy + g
+        # a bounce changes the polarity of the velocity
+        if x - sprite_hw < 0 or x + sprite_hw > display.width:
+            vx = -vx  # bounce!
+            tile_inc = - tile_inc # change ball "spinning" direction
+        if y + sprite_hw > display.height:
+            vy = -(vy - g)  # bounce! (and remove gravity we added before)
+
+        # TileGrids are top-left referenced, so subtract that off
+        # and convert to integer pixel x,y before setting tilegrid xy
+        sprite.x = int(x - sprite_hw)
+        sprite.y = int(y - sprite_hw)
+
+        # do the animation
+        if time.monotonic() - last_tile_time > 0.01:
+            last_tile_time = time.monotonic()
+            # get first thing in group (only thing), assume it's a TileGrid
+            # then access first space (only gridspace)
+            sprite[0][0] = (sprite[0][0] + tile_inc) % sprite_tile_count
+
+        # this gives framerate of 20-24 FPS on FunHouse (ESP32S2 240x240 SPI TFT)
+        display.refresh(); time.sleep(0.01)
+
