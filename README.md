@@ -17,6 +17,37 @@ For more info, see [this tweet thread](https://twitter.com/todbot/status/1428096
 - Copy the entire `screensaver` directory to your CIRCUITPY drive
 - See the `demo_code.py` example (or just copy it over as `code.py`) to see how to use it
 
+## Usage
+
+To load up a screensaver and run the screensaver forever:
+
+```py
+from screensaver import screensaver_dvdlogo
+screensaver_dvdlogo()
+```
+
+or
+
+```py
+from screensaver import screensaver_flyingtoasters
+screensaver_flyingtoasters()
+
+```
+
+To make a screensaver stop after a condition is met, pass in a function as the
+`should_exit_func` parameter. If this function returns `True` the screensaver
+exits.
+
+For example. this `exit_screensaver()` function returns `True` after 10 seconds:
+
+```py
+saver_time = time.monotonic()
+def exit_screensaver():
+  return (time.monotonic() - saver_time > 10) # allow 10 secs of savering
+
+screensaver_dvdlogo( should_exit_func=exit_screensaver )
+```
+
 ## Notes
 
 - Assumes CircuitPython 7, but only for `rainbowio`. And should work in CP6.
