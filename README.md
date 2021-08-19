@@ -34,6 +34,14 @@ screensaver_flyingtoasters()
 
 ```
 
+or
+
+```py
+from screensaver import screensaver_boingball
+screensaver_boingball()
+
+```
+
 To make a screensaver stop after a condition is met, pass in a function as the
 `should_exit_func` parameter. If this function returns `True` the screensaver
 exits.
