@@ -13,14 +13,14 @@ except ImportError:
     def randcolor(): return random.randint(0,0xffffff) # not as good but passable
 
 # dvdlogo! currently our main screensaver
-def screensaver_dvdlogo(display=board.DISPLAY, should_exit_func=None):
+def screensaver_dvdlogo(display=None, should_exit_func=None):
 
     sprite_w = 70 # width of the sprite to create
     sprite_fname="/screensaver/dvdlogo_70.bmp"
 
     display.auto_refresh = False  # only update display on display.refresh()
     screen = displayio.Group()  # group that holds everything
-    display.show(screen) # add main group to display
+    display.root_group = screen # add main group to display
 
     sprite1,sprite1_pal = adafruit_imageload.load(sprite_fname)
     sprite1_pal.make_transparent(0)
@@ -57,7 +57,7 @@ def screensaver_dvdlogo(display=board.DISPLAY, should_exit_func=None):
 
 
 # flying toasters!
-def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None,
+def screensaver_flyingtoasters(display=None, should_exit_func=None,
                                num_toasters=2, num_toasts=3):
     sprite_w = 48 # width of the sprites
     sprite1_fname="/screensaver/toast_48.bmp"
@@ -66,7 +66,7 @@ def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None,
 
     display.auto_refresh = False  # only update display on display.refresh()
     screen = displayio.Group()  # group that holds everything
-    display.show(screen) # add main group to display
+    display.root_group = screen # add main group to display
 
     sprite1,sprite1_pal = adafruit_imageload.load(sprite1_fname)
     sprite1_pal.make_transparent(0)
@@ -141,7 +141,7 @@ def screensaver_flyingtoasters(display=board.DISPLAY, should_exit_func=None,
         display.refresh(); time.sleep(0.01)
 
 # boingball! amiga bouncing ball
-def screensaver_boingball(display=board.DISPLAY, should_exit_func=None,
+def screensaver_boingball(display=None, should_exit_func=None,
                           bg_fname=None):
 
     sprite_scale = 2
@@ -153,7 +153,7 @@ def screensaver_boingball(display=board.DISPLAY, should_exit_func=None,
 
     display.auto_refresh = False  # only update display on display.refresh()
     screen = displayio.Group()  # group that holds everything
-    display.show(screen) # add main group to display
+    display.root_group = screen # add main group to display
 
     # get background image, if there is one
     if bg_fname is not None:
